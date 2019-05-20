@@ -13,9 +13,11 @@
 
     $scope.countingItems = function(itemsArray){
       var itemsArray = $scope.items.split(',');
-      if(itemsArray.length == 1 && itemsArray[0].length == 0){
+
+      if(itemsArray.length == 1 && itemsArray[0].trim().length == 0){
         $scope.message = "Please, enter data first";
       }
+
       else{
         for(var i = 0; i < itemsArray.length; i++){
             if(itemsArray[i].trim().length == 0){
