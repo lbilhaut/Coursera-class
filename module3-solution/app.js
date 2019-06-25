@@ -24,7 +24,7 @@
 			console.log("In the getMenuItems service");
 			var response = $http({
 				method: "GET",
-				url: "http://davids-restaurant.herokuapp.com/menu_items.json"
+				url: "https://davids-restaurant.herokuapp.com/menu_items.json"
 			})
 			.then(function (response){
 				controllerInstance.items = response.data.menu_items;
