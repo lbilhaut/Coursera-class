@@ -1,30 +1,35 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Narrow Down Your Menu Choice</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
-    <script src="angular.min.js"></script>
-    <script src="app.js"></script>
-  </head>
+<head>
+<title>Narrow Down Your Menu Choice</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styles/bootstrap.min.css">
+<link rel="stylesheet" href="styles/styles.css">
+<script src="angular.min.js"></script>
+<script src="app.js"></script>
+</head>
 <body data-ng-app='NarrowItDownApp'>
-   <div class="container" data-ng-controller='NarrowItDownController as narrowItDownCtrl'>
-    <h1>{GITHUB} Narrow Down Your Chinese Menu Choice</h1>
+	<div class="container"
+		data-ng-controller='NarrowItDownController as narrowItDownCtrl'>
+		<h1>{LOCAL FILE} Narrow Down Your Chinese Menu Choice</h1>
 
-    <div class="form-group">
-      <input type="text" placeholder="search term" class="form-control">
-    </div>
-    <div class="form-group narrow-button">
-      <button class="btn btn-primary">Narrow It Down For Me!</button>
-    </div>
+		<div class="form-group">
+			<input type="text" placeholder="search term" class="form-control" data-ng-model="searchWord">
+		</div>
+		<div class="form-group narrow-button">
+			<button class="btn btn-primary" data-ng-click="narrowItDownCtrl.buttonActivated()">Narrow It Down For Me!</button>
+		</div>
 
-    <!-- found-items should be implemented as a component -->
-<!--     <found-items found-items="...." on-remove="...."></found-items> -->
-	<ol>
-  		<found-items data-ng-repeat="item in narrowItDownCtrl.menu.found"></found-items>
-  	</ol>
-  </div>
+		<!-- found-items should be implemented as a component -->
+		<!--     <found-items found-items="...." on-remove="...."></found-items> -->
+		<br>
+		<h3>List is</h3>
+			<found-items >   		</found-items>
+
+		<ol >
+				<li data-ng-repeat="item in narrowItDownCtrl.found">[{{item.short_name}}] - {{item.name}}: {{item.description}}</li>
+		</ol>
+	</div>
 
 </body>
 </html>
