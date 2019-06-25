@@ -38,7 +38,7 @@
 				function (foundItems){
 					menu.found = foundItems;
 //					console.log("Found items after return " + foundItems[42].description);						
-					console.log("Found is " + menu.found[42].description);
+					console.log("Found is " + menu.found[42].name);
 			}
 		);
 		

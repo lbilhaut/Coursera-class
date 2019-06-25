@@ -21,7 +21,9 @@
 
     <!-- found-items should be implemented as a component -->
 <!--     <found-items found-items="...." on-remove="...."></found-items> -->
-  <found-items></found-items>
+	<ol>
+  		<found-items data-ng-repeat="item in narrowItDownCtrl.menu.found"></found-items>
+  	</ol>
   </div>
 
 </body>
