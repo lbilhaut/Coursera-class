@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
   </head>
-<body>
-   <div class="container">
+<body data-ng-app='NarrowItDownApp'>
+   <div class="container" data-ng-controller='NarrowItDownController as narrowItDownCtrl'>
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
     <div class="form-group">
