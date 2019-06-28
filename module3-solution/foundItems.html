@@ -1,7 +1,10 @@
 <div>
 	<br>
-	<h3>List is</h3>
-	<li>
-		{{item.name}}
-	</li>	
+	<h3>List of items corresponding to your search:</h3>
+	<ol >
+			<li data-ng-repeat="item in found">[{{item.short_name}}] - {{item.name}}: {{item.description}}.
+			<button class="btn btn-primary" data-ng-click="onRemove({index: $index})">Don't want this one!</button>
+			</li>
+	</ol>
+
 </div>

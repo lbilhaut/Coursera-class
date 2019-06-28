@@ -7,12 +7,14 @@
 	.directive('foundItems', FoundItems);
 
 
+/////// Directive
 	function FoundItems(){
 	var ddo = {
 	templateUrl: 'foundItems.html',
-//	scope:{
-//	name: '<',
-//	},
+	scope:{
+	found: '=foundItems',
+	onRemove: '&'
+	},
 //	controller: FoundItemsDirectiveController,
 //	controllerAs: 'list',
 //	bindToController: true
@@ -24,10 +26,8 @@
 	}
 
 
-//	function FoundItemsDirectiveController(){
 
-//	}
-
+//// Controller
 	NarrowItDownController.$inject=['$scope','MenuSearchService'];
 	function NarrowItDownController($scope, MenuSearchService){
 		var menu = this;
@@ -35,10 +35,10 @@
 		menu.buttonActivated = function(){
 			console.log("Search term is " + $scope.searchWord);
 			console.log("Button activated!");
-			var promise = MenuSearchService.getMatchedMenuItems($scope.searchWord); 
+			var found = MenuSearchService.getMatchedMenuItems($scope.searchWord);
+			console.log("After returning foundItems");
 
-
-			promise.then( function (foundItems){
+			found.then( function (foundItems){
 				menu.found = foundItems;
 			})
 			.catch(function (error){
@@ -47,53 +47,20 @@
 
 		};
 
-//		var promise = MenuSearchService.getMatchedMenuItems($scope.searchWord); 
-
-
-
-
-//		menu.found = [];
-
-//		MenuSearchService.getMatchedMenuItems("chicken").then(
-//		function (foundItems){
-//		menu.found = foundItems;
-
-////		console.log("Found items after return " + foundItems[42].description);						
-//		console.log("Found is " + menu.found[42].name);
-//		return menu.found;
-//		}
-//		);
-
-//		console.log("Found is now" + menu.found[42].name);
-
-
-//		promise.then(function (response){
-//		console.log("Response is returned!");
-//		console.log(response.data.menu_items[42].name);
-
-//		menu.categories = response.data;
-//		})
-//		.catch(function (error){
-//		console.log("Something went wrong");
-//		});
-
+		menu.removeItem = function(itemIndex){
+			console.log("In the remove function");
+			menu.found.splice(itemIndex,1);
+		};
 	}
 
+////// Service
 	MenuSearchService.$inject=['$http'];
 	function MenuSearchService($http){
 
 		var service = this;
 
-
-//		service.getMenuItems = function(){
-//		console.log("In the getMenuItems service");
-//		var response = $http({
-//		method: "GET",
-//		url: "https://davids-restaurant.herokuapp.com/menu_items.json"
-//		});
-
 		service.getMatchedMenuItems = function(searchTerm){
-			console.log("searchTerm is "  + searchTerm)
+	//		console.log("searchTerm is "  + searchTerm)
 			var foundItems =[];
 
 			return  $http({
@@ -101,7 +68,7 @@
 				url: "https://davids-restaurant.herokuapp.com/menu_items.json"
 			})
 			.then(function (response){
-				console.log("searchTerm is still "  + searchTerm);
+		//		console.log("searchTerm is still "  + searchTerm);
 				for(var i = 0; i < response.data.menu_items.length; i++){
 					if(response.data.menu_items[i].description.toLowerCase().indexOf(searchTerm.toLowerCase()) !==-1){
 						console.log("search term found!");
@@ -113,6 +80,7 @@
 						foundItems.push(item);
 					}
 				}
+				console.log("Returning foundItems");
 				return foundItems;
 
 			})
