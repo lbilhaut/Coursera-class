@@ -1,6 +1,7 @@
 <div>
 	<br>
 	<h3>List of items corresponding to your search:</h3>
+	<div ng-if="found.length === 0" class="error">Nothing found!</div>
 	<ol >
 			<li data-ng-repeat="item in found">[{{item.short_name}}] - {{item.name}}: {{item.description}}.
 			<button class="btn btn-primary" data-ng-click="onRemove({index: $index})">Don't want this one!</button>
