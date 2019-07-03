@@ -14,16 +14,15 @@
 	<div class="container"
 		data-ng-controller='NarrowItDownController as narrowItDownCtrl'>
 		<h1>Narrow Down Your Chinese Menu Choice</h1>
-
 		<div class="form-group">
 			<input type="text" placeholder="search term" class="form-control" data-ng-model="searchWord">
 		</div>
 		<div class="form-group narrow-button">
 			<button class="btn btn-primary" data-ng-click="narrowItDownCtrl.buttonActivated()">Narrow It Down For Me!</button>
 		</div>
-		<div ng-if="searchWord.trim.length === 0" class="error">Nothing found, please, enter a search term!</div>
 
 		<found-items found-items= "narrowItDownCtrl.found" on-remove="narrowItDownCtrl.removeItem(index)">   		</found-items>
+		<div ng-if="narrowItDownCtrl.nothingFoundDisplay" class="noResult"> <br> <br> Nothing found </div>
 
 	</div>
 

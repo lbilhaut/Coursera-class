@@ -20,7 +20,6 @@
 //	bindToController: true
 	restrict: 'E'
 	};
-	console.log("In the directive");
 	return ddo;
 
 	}
@@ -31,24 +30,43 @@
 	NarrowItDownController.$inject=['$scope','MenuSearchService'];
 	function NarrowItDownController($scope, MenuSearchService){
 		var menu = this;
+		var found = [];
 
 		menu.buttonActivated = function(){
-			console.log("Search term is " + $scope.searchWord);
-			console.log("Button activated!");
-			var found = MenuSearchService.getMatchedMenuItems($scope.searchWord);
-			console.log("After returning foundItems");
+			// console.log("Search term is " + $scope.searchWord);
+			// console.log("Button activated!");
+			menu.nothingFoundDisplay = false;
 
-			found.then( function (foundItems){
-				menu.found = foundItems;
-			})
-			.catch(function (error){
-				console.log("Something went wrong");
-			});
+			if($scope.searchWord === undefined){
+				menu.nothingFoundDisplay = true;
+				menu.found=[];
+	//			console.log("Search word is undefined");
+			}
+			if ($scope.searchWord !== undefined && $scope.searchWord.trim().length === 0){
+				menu.nothingFoundDisplay = true;
+				menu.found=[];
+	//			console.log("No search word");
+			}
+
+
+			if (!menu.nothingFoundDisplay){
+				found = MenuSearchService.getMatchedMenuItems($scope.searchWord);
+				found.then( function (foundItems){
+					menu.found = foundItems;
+					if(menu.found.length === 0){
+		//				console.log("No items found");
+						menu.nothingFoundDisplay = true;
+					}
+				})
+				.catch(function (error){
+					console.log("Something went wrong");
+				});
+
+			}
 
 		};
 
 		menu.removeItem = function(itemIndex){
-			console.log("In the remove function");
 			menu.found.splice(itemIndex,1);
 		};
 	}
@@ -71,7 +89,7 @@
 		//		console.log("searchTerm is still "  + searchTerm);
 				for(var i = 0; i < response.data.menu_items.length; i++){
 					if(response.data.menu_items[i].description.toLowerCase().indexOf(searchTerm.toLowerCase()) !==-1){
-						console.log("search term found!");
+	//					console.log("search term found!");
 						var item = {
 								name: response.data.menu_items[i].name,
 								short_name : response.data.menu_items[i].short_name,
@@ -80,7 +98,6 @@
 						foundItems.push(item);
 					}
 				}
-				console.log("Returning foundItems");
 				return foundItems;
 
 			})
