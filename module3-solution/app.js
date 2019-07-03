@@ -30,7 +30,6 @@
 	NarrowItDownController.$inject=['$scope','MenuSearchService'];
 	function NarrowItDownController($scope, MenuSearchService){
 		var menu = this;
-		var found = [];
 
 		menu.buttonActivated = function(){
 			// console.log("Search term is " + $scope.searchWord);
@@ -38,20 +37,20 @@
 			menu.nothingFoundDisplay = false;
 
 			if($scope.searchWord === undefined){
+				//			console.log("Search word is undefined");
 				menu.nothingFoundDisplay = true;
 				menu.found=[];
-	//			console.log("Search word is undefined");
 			}
 			if ($scope.searchWord !== undefined && $scope.searchWord.trim().length === 0){
+				//			console.log("No search word");
 				menu.nothingFoundDisplay = true;
 				menu.found=[];
-	//			console.log("No search word");
 			}
 
 
 			if (!menu.nothingFoundDisplay){
-				found = MenuSearchService.getMatchedMenuItems($scope.searchWord);
-				found.then( function (foundItems){
+				menu.found = MenuSearchService.getMatchedMenuItems($scope.searchWord);
+				menu.found.then( function (foundItems){
 					menu.found = foundItems;
 					if(menu.found.length === 0){
 		//				console.log("No items found");
