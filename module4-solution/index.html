@@ -2,36 +2,39 @@
 
 <html lang="en" ng-app='MenuApp'>
 <head>
-<title>Chinese Restaurent Menu</title>
+<title>Chinese Restaurant Menu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="styles/bootstrap.min.css">
 <link rel="stylesheet" href="styles/styles.css">
-<script src="angular.min.js"></script>
-<script scr="angular-ui-router.min.js"> </script>
-<script src="menuapp.module.js"></script>
-<script src="data.module.js"></script>
-<script src="categories.component.js"></script>
-<script src="menudata.service.js"></script>
-<script src="routes.js"></script>
+
+
 
 </head>
 
 <body >
 	<div class="container">
-		<h1>Welcome to our restaurant!</h1>
-    Home
-    <br>
-    line 1: link with ui-sref
-    <br>
-    <a ui-sref="categories"> Link to categories </a>
-    <br>
-    <a ui-sref="home">Home</a>
-    <br>line 2 - categories element<br>
-    <categories></categories>
-    <br>line 3: ui-view<br>
     <ui-view></ui-view>
 
 	</div>
+
+    <!-- Libraries -->
+<script src="lib/angular.min.js"></script>
+<script src="lib/angular-ui-router.min.js"> </script>
+
+    <!-- Modules -->
+<script src="src/menu/data.module.js"></script>
+<script src="src/menu/menuapp.module.js"></script>
+
+    <!-- Routes -->
+<script src="src/routes.js"></script>
+
+
+    <!-- 'ShoppingList' module artifacts -->
+<script src="src/menu/categories.component.js"></script>
+<script src="src/menu/items.component.js"></script>
+<script src="src/menu/categories.controller.js"></script>
+<script src="src/menu/menudata.service.js"></script>
+<script src="src/menu/categoryDetail.controller.js"></script>
 
 </body>
 </html>
