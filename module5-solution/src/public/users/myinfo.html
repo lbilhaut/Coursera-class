@@ -1,0 +1,9 @@
+<div ng-if="UserInfoCtrl.alreadySignedUp">
+  <h1>{{UserInfoCtrl.userdetail.firstName}}'s info</h1>
+  <user-info userdetail="UserInfoCtrl.userdetail"></user-info>
+  <item-info itemdetail="UserInfoCtrl.itemdetail"></item-info>
+</div>
+
+<div ng-if="!UserInfoCtrl.alreadySignedUp">
+  Not Signed Up Yet. <a ui-sref="public.signup">Sign up Now!</a>
+</div>

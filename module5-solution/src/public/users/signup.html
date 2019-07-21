@@ -1,0 +1,40 @@
+<h1>Sign up!</h1>
+<form name="signupForm" novalidate class="signupForm">
+  <input type="text" name="firstName" placeholder="First Name" ng-model="UserCtrl.user.firstName" required minlength="4" ng-maxLength=10>
+    <span ng-if="(signupForm.firstName.$error.minlength || signupForm.firstName.$error.required) && signupForm.firstName.$touched">
+    Firstname should at least be four characters long
+    </span>
+    <span ng-if="(signupForm.firstName.$error.maxlength || signupForm.firstName.$error.required) && signupForm.firstName.$touched">
+    Firstname should be less than ten characters long
+    </span>
+
+  <input type="text" name="lastName" placeholder="Last Name" ng-model="UserCtrl.user.lastName" required minlength="4" ng-maxLength=10>
+    <span ng-if="(signupForm.lastName.$error.minlength || signupForm.lastName.$error.required) && signupForm.lastName.$touched">
+    Lastname should at least be four characters long
+    </span>
+    <span ng-if="(signupForm.lastName.$error.maxlength || signupForm.lastName.$error.required) && signupForm.lastName.$touched">
+    Lastname should be less than ten characters long
+    </span>
+
+  <input type="email" name="emailAddress" placeholder="Email Address" ng-model="UserCtrl.user.emailAddress" required>
+    <span ng-if="signupForm.emailAddress.$invalid && signupForm.emailAddress.$touched">
+    Must be a valid email address handle@domain format
+    </span>
+
+  <input type="text" name="phoneNumber" placeholder="Phone ###-###-####" ng-model="UserCtrl.user.phoneNumber" pattern="(\d{3})-(\d{3})-(\d{4})">
+    <span ng-if="signupForm.phoneNumber.$invalid && signupForm.phoneNumber.$touched">
+    Phone must be in format ###-###-####
+    </span>
+
+  <input type="text" name="favoriteDish" ng-model="UserCtrl.user.favoriteDish" placeholder="Favorite Dish">
+  <span ng-if="!UserCtrl.dishExist">No such menu number exists</span>
+
+  <button ng-disabled="signupForm.$invalid" ng-click="UserCtrl.signupSubmit(UserCtrl.user.favoriteDish)">Submit</button>
+
+  <!-- <div style="margin-top: 10px"> Form valid? {{signupForm.$valid}} </div> -->
+
+  </form>
+
+<div ng-if="UserCtrl.completed">
+    Thanks for signing up {{UserCtrl.user.firstName}}! Your information has been saved.
+</div>
